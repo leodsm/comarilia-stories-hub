@@ -11,6 +11,21 @@ export type Story = {
 };
 
 export default function StoryCard({ story, className }: { story: Story; className?: string }) {
+  const badgeClass = (() => {
+    switch (story.category) {
+      case "Cidade":
+        return "bg-primary text-primary-foreground";
+      case "Região":
+        return "bg-success text-success-foreground";
+      case "Cultura":
+        return "bg-accent text-accent-foreground";
+      case "História":
+        return "bg-purple text-purple-foreground";
+      default:
+        return "bg-secondary text-secondary-foreground";
+    }
+  })();
+
   return (
     <article className={cn("group relative overflow-hidden rounded-lg border bg-card shadow-elevated-hover", className)}>
       <div className="absolute left-0 right-0 top-0 h-1 w-full bg-primary/20">
@@ -26,7 +41,7 @@ export default function StoryCard({ story, className }: { story: Story; classNam
         />
         <div className="pointer-events-none absolute inset-0 image-overlay-gradient" />
         <div className="absolute left-2 top-2">
-          <Badge variant="secondary">{story.category}</Badge>
+          <Badge className={badgeClass}>{story.category}</Badge>
         </div>
         <h3 className="absolute bottom-2 left-2 right-2 text-base font-semibold leading-snug text-primary-foreground">
           {story.title}
