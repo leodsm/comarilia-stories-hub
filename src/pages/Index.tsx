@@ -1,14 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import StoryCarousel from "@/components/StoryCarousel";
+import HeroSection from "@/components/HeroSection";
+import CategorySection from "@/components/CategorySection";
+import PlacesSection from "@/components/PlacesSection";
+import { stories, byCategory, places } from "@/data/mock";
+import { Helmet } from "react-helmet-async";
 
-const Index = () => {
+export default function Index() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <Helmet>
+        <title>ComMarília.com.br — Notícias, Web Stories e Locais</title>
+        <meta name="description" content="Notícias locais de Marília-SP e região. Web Stories 9:16, cultura e história com foco mobile-first." />
+        <link rel="canonical" href="https://commarilia.com.br/" />
+      </Helmet>
+      <Header />
+      <main>
+        <h1 className="sr-only">ComMarília — Notícias e Web Stories de Marília-SP</h1>
+        <section aria-label="Stories">
+          <StoryCarousel stories={stories} />
+        </section>
+        <HeroSection stories={stories} />
+        <CategorySection title="Cidade" stories={byCategory.Cidade} />
+        <CategorySection title="Região" stories={byCategory.Região} />
+        <CategorySection title="Cultura" stories={byCategory.Cultura} />
+        <CategorySection title="História" stories={byCategory.História} />
+        <PlacesSection places={places} />
+      </main>
+      <Footer />
+    </>
   );
-};
-
-export default Index;
+}
